@@ -31,10 +31,6 @@ import java.util.ResourceBundle;
 public class MorfologikEkavianSpellerRule extends MorfologikSpellerRule {
 
   public static final String RULE_ID = "MORFOLOGIK_RULE_SR_EKAVIAN";
-<<<<<<< HEAD:languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/MorfologikEkavianSpellerRule.java
-=======
-  
->>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25:languagetool-language-modules/sr/src/main/java/org/languagetool/rules/sr/ekavian/MorfologikEkavianSpellerRule.java
   private static final String BASE_DICTIONARY_PATH = "/sr/dictionary/ekavian/";
 
   public MorfologikEkavianSpellerRule(

@@ -19,7 +19,6 @@
 package org.languagetool.language;
 
 import org.languagetool.Language;
-import org.languagetool.language.AbstractLanguageConcurrencyTest;
 
 /**
  * Support for Serbian language spoken in Bosnia and Herzegovina
@@ -27,11 +26,6 @@ import org.languagetool.language.AbstractLanguageConcurrencyTest;
  * Test class
  *
  * @author Zoltán Csala
-<<<<<<< HEAD
- *
- * @since 4.0
-=======
->>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
  */
 public class BosnianSerbianConcurrencyTest extends AbstractLanguageConcurrencyTest {
 

@@ -35,11 +35,8 @@ public class SerbianSynthesizer extends BaseSynthesizer {
    * @param resourceFileName The dictionary file name.
    * @param tagFileName      The name of a file containing all possible tags.
    */
-<<<<<<< HEAD
+
   public SerbianSynthesizer(final String resourceFileName, final String tagFileName) {
-=======
-  public SerbianSynthesizer(String resourceFileName, String tagFileName) {
->>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
     super(resourceFileName, tagFileName);
   }
 }

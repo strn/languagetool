@@ -19,10 +19,6 @@
 package org.languagetool.language;
 
 import org.languagetool.Language;
-<<<<<<< HEAD
-import org.languagetool.language.AbstractLanguageConcurrencyTest;
-=======
->>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
 
 /**
  * Support for Serbian language spoken in Montenegro
@@ -30,11 +26,8 @@ import org.languagetool.language.AbstractLanguageConcurrencyTest;
  * Test class
  *
  * @author Zoltán Csala
-<<<<<<< HEAD
  *
  * @since 4.0
-=======
->>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
  */
 public class MontenegrinSerbianConcurrencyTest extends AbstractLanguageConcurrencyTest {
 
