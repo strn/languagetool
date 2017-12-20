@@ -19,15 +19,21 @@
 package org.languagetool.language;
 
 import org.languagetool.Language;
+<<<<<<< HEAD:languagetool-language-modules/sr/src/test/java/org/languagetool/language/SerbianConcurrencyTest.java
 import org.languagetool.language.AbstractLanguageConcurrencyTest;
 import org.languagetool.language.Serbian;
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25:languagetool-language-modules/sr/src/test/java/org/languagetool/language/SerbianConcurrencyTest.java
 
 /**
  * Test class
  *
  * @author Zoltán Csala
+<<<<<<< HEAD:languagetool-language-modules/sr/src/test/java/org/languagetool/language/SerbianConcurrencyTest.java
  *
  * @since 4.0
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25:languagetool-language-modules/sr/src/test/java/org/languagetool/language/SerbianConcurrencyTest.java
  */
 public class SerbianConcurrencyTest extends AbstractLanguageConcurrencyTest {
 

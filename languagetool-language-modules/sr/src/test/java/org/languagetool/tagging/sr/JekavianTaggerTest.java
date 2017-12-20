@@ -18,12 +18,17 @@
  */
 package org.languagetool.tagging.sr;
 
+<<<<<<< HEAD
 import org.junit.Before;
 import org.junit.Test;
 import org.languagetool.TestTools;
 import org.languagetool.language.JekavianSerbian;
 import org.languagetool.language.Serbian;
 import org.languagetool.tokenizers.WordTokenizer;
+=======
+import org.junit.Test;
+import org.languagetool.TestTools;
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
 
 import java.io.IOException;
 
@@ -33,8 +38,11 @@ import static org.junit.Assert.*;
  * Test for Serbian jekavian tagger
  *
  * @author Zoltán Csala
+<<<<<<< HEAD
  *
  * @since 4.0
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
  */
 public class JekavianTaggerTest extends AbstractSerbianTaggerTest {
 
@@ -43,9 +51,13 @@ public class JekavianTaggerTest extends AbstractSerbianTaggerTest {
   }
 
   /**
+<<<<<<< HEAD
    * Special case for auxilliary verb "jesam" (I am)
    *
    * @throws IOException
+=======
+   * Special case for auxiliary verb "jesam" (I am)
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
    */
   @Test
   public void testTaggerJesam() throws IOException {
@@ -56,8 +68,11 @@ public class JekavianTaggerTest extends AbstractSerbianTaggerTest {
 
   /**
    * Word that exists only in Јеkavian dictionary
+<<<<<<< HEAD
    *
    * @throws IOException
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
    */
   @Test
   public void testTaggerSvijet() throws Exception {

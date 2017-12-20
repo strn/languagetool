@@ -29,6 +29,10 @@ import java.util.ResourceBundle;
 public final class MorfologikJekavianSpellerRule extends MorfologikSpellerRule {
 
   public static final String RULE_ID = "MORFOLOGIK_RULE_SR_JEKAVIAN";
+<<<<<<< HEAD
+=======
+  
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
   private static final String BASE_DICTIONARY_PATH = "/sr/dictionary/јekavian/";
 
   public MorfologikJekavianSpellerRule(

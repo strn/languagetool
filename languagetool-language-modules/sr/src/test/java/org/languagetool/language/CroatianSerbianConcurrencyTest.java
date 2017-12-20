@@ -19,8 +19,11 @@
 package org.languagetool.language;
 
 import org.languagetool.Language;
+<<<<<<< HEAD
 import org.languagetool.language.AbstractLanguageConcurrencyTest;
 import org.languagetool.language.CroatianSerbian;
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
 
 /**
  * Support for Serbian language spoken in Croatia
@@ -28,8 +31,11 @@ import org.languagetool.language.CroatianSerbian;
  * Test class
  *
  * @author Zoltán Csala
+<<<<<<< HEAD
  *
  * @since 4.0
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
  */
 public class CroatianSerbianConcurrencyTest extends AbstractLanguageConcurrencyTest {
   @Override

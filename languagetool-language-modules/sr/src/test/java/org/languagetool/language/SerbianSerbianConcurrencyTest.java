@@ -26,8 +26,11 @@ import org.languagetool.Language;
  * Test class
  *
  * @author Zoltán Csala
+<<<<<<< HEAD
  *
  * @since 4.0
+=======
+>>>>>>> e8f4ad8238abfb79fe729c777f07d0ad8a9caf25
  */
 public class SerbianSerbianConcurrencyTest extends AbstractLanguageConcurrencyTest {
 
