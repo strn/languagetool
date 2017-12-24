@@ -110,6 +110,32 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
     <!-- Tippfehler -->
     <!-- ====================================================================== -->
     <category id="TYPOS" name="Mögliche Tippfehler">
+        <rule id="ZU_SCHRIEBEN_ETC" name="zu schrieben (schreiben) etc.">
+            <pattern>
+                <token>zu</token>
+                <marker>
+                    <token regexp='yes'>schrien|anstiegen|aufwiesen|beliehen|beschienen|beschrieen|beschrieben|bestiegen|betrieben|bewiesen|blieben|durchschienen|durchstiegen|entliehen|entschieden|entstiegen|erschienen|erwiesen|gediehen|liehen|mieden|priesen|rieben|schieden|schienen|schrieben|schrieen|schwiegen|spieen|stiegen|trieben|wiesen|hießen|sien|überschrieben|überstiegen|übertrieben|überwiesen|umschrieben|unterblieben|unterschieden|unterschrieben|untertrieben|unterwiesen|verblieben|verhießen|verliehen|vermieden|verrieben|verschrieen|verschrieben|verschwiegen|vertrieben|verwiesen|verziehen|zerrieben</token>
+                </marker>
+            </pattern>
+            <message>Meinten Sie <suggestion><match no="2" regexp_match="ie" regexp_replace="ei"/></suggestion>?</message>
+            <example correction='schreiben'>Versuch mal, zu <marker>schrieben</marker>.</example>
+            <example correction='beschreiben'>Versuch mal, das zu <marker>beschrieben</marker>.</example>
+        </rule>
+        <rule id="SAGT_UND_BESCHEID" name="sagt und (uns) Bescheid">
+            <pattern>
+                <token regexp='yes'>sag|g[ai]b|sagte?|gebt|sagt?en|g[ae]ben</token>
+                <marker>
+                    <token>und</token>
+                </marker>
+                <token min="0">doch</token>
+                <token min="0">bitte</token>
+                <token>Bescheid</token>
+            </pattern>
+            <message>Meinten Sie <suggestion>uns</suggestion>?</message>
+            <example correction='uns'>Sagt <marker>und</marker> doch bitte Bescheid, wenn sich etwas ändert.</example>
+            <example correction='uns'>Sagt <marker>und</marker> bitte Bescheid, wenn sich etwas ändert.</example>
+            <example correction='uns'>Sagt <marker>und</marker> Bescheid, wenn sich etwas ändert.</example>
+        </rule>
         <rule id="DE_KOMMA" name="de, (dem)">
             <antipattern>
                 <token>.</token>
@@ -270,7 +296,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         <rulegroup id="WO_BIS" name="Wo bis (bist) du?">
             <rule>
                 <pattern>
-                    <token regexp="yes">wo(durch|her|mit|von)?</token>
+                    <token regexp="yes">wo(durch|her|mit|raus|von)?</token>
                     <marker>
                         <token>bis</token>
                     </marker>
@@ -1068,6 +1094,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <example>Unsere Sprache ist fast dieselbe, <marker>wir</marker> haben eine gemeinsame Kultur.</example>
         </rule>
         <rule id="DU_DIE" name="'du (die)'">
+            <antipattern>
+                <token>,</token>
+                <token>du</token>
+                <token postag="SUB:(NOM:SIN:FEM|AKK:SIN:FEM|NOM:PLU|AKK:PLU).*" postag_regexp="yes"></token>
+                <token postag="SENT_END"/>
+            </antipattern>
             <pattern>
                 <token><exception postag="VER.*:2:SIN.*" postag_regexp="yes"/><exception postag="UNKNOWN"/></token>
                 <marker>
@@ -1985,67 +2017,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <url>http://www.korrekturen.de/beliebte_fehler/email.shtml</url>
             <rule>
                 <pattern>
-                    <token regexp="yes" skip="-1" inflected="yes">schicke.*|sende.*|Internet.*|Web.*|.*\@.*</token>
-                    <marker>
-                        <token>Email</token>
-                    </marker>
+                    <token>Email</token>
                 </pattern>
                 <message>Meinten Sie <suggestion>E-Mail</suggestion> (elektronische Post) statt 'Email' (Schmelzüberzug)?</message>
                 <short>Möglicher Tippfehler</short>
                 <example correction="E-Mail">Er schickt mir eine <marker>Email</marker>.</example>
                 <example correction="E-Mail">Schicke mir eine <marker>Email</marker>.</example>
-                <example>Das ist <marker>Email</marker>.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token regexp="yes">die|eine|[mds]eine|ihre|unsere|eure</token>
-                    <marker>
-                        <token>Email</token>
-                    </marker>
-                </pattern>
-                <message>Meinten Sie <suggestion>E-Mail</suggestion> (elektronische Post) statt 'Email' (Schmelzüberzug)?</message>
-                <short>Möglicher Tippfehler</short>
-                <example correction="E-Mail">Er schickt mir eine <marker>Email</marker>.</example>
-                <example correction="E-Mail">Schicke mir eine <marker>Email</marker>.</example>
-                <example>Das ist <marker>Email</marker>.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <marker>
-                        <token skip="-1">Email</token>
-                    </marker>
-                    <token regexp="yes" inflected="yes">schicke.*|sende.*|Internet.*|Web.*|.*\@.*</token>
-                </pattern>
-                <message>Meinten Sie <suggestion>E-Mail</suggestion> (elektronische Post) statt 'Email' (Schmelzüberzug)?</message>
-                <short>Möglicher Tippfehler</short>
-                <example correction="E-Mail">Er hat mir eine <marker>Email</marker> geschickt.</example>
-                <example correction="E-Mail">Meine <marker>Email</marker> ist me@example.com.</example>
-                <example>Das ist <marker>Email</marker>.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token postag="SENT_START"/>
-                    <marker>
-                        <token>Email</token>
-                    </marker>
-                    <token>:</token>
-                </pattern>
-                <message>Meinten Sie <suggestion>E-Mail</suggestion> (elektronische Post) statt 'Email' (Schmelzüberzug)?</message>
-                <short>Möglicher Tippfehler</short>
-                <example correction="E-Mail"><marker>Email</marker>: test@example.com</example>
-                <example>Er schickt mir eine <marker>E-Mail</marker>.</example>
-                <example>Das ist <marker>Email</marker>.</example>
-            </rule>
-            <rule>
-                <pattern>
-                    <token>per</token>
-                    <marker>
-                        <token>Email</token>
-                    </marker>
-                </pattern>
-                <message>Meinten Sie <suggestion>E-Mail</suggestion> (elektronische Post) statt 'Email' (Schmelzüberzug)?</message>
-                <short>Möglicher Tippfehler</short>
-                <example correction="E-Mail">Ich regle die Angelegenheit per <marker>Email</marker>.</example>
             </rule>
             <rule>
                 <regexp case_sensitive='yes'>\b(email|eMail|e-Mail|e-mail|E-mail)s?\b</regexp>
@@ -8429,6 +8406,12 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
         </rule>
         <rulegroup id="MOEGLICHER_WEISE_ETC" name="'möglicher Weise (möglicherweise)' etc.">
             <rule>
+                <antipattern>
+                    <token>in</token>
+                    <token skip="3">für</token>
+                    <token regexp="yes">(charakteristisch|erklärlich|typisch|zulässig)er</token>
+                    <token>Weise</token>
+                </antipattern>
                 <pattern>
                     <marker>
                         <token regexp="yes">(absurd|auffällig|bedauerlich|bedauernswert|begreiflich|beklagenswert|bemerkenswert|berechtigt|betrüblich|bevorzugt|bezeichnend|billig|blöd|charakteristisch|dankenswert|drollig|ehrlich|eigenartig|eigenmächtig|eigentümlich|entgegenkommend|enttäuschend|erfreulich|erklärlich|erstaunlich|evident|fair|fälschlich|fatal|folgend|frech|freundlich|gebührend|gemein|gerecht|gewöhnlich|gleich|glied|glücklich|gnädig|günstig|heimlich|heimtückisch|herkömmlich|ideal|idiotisch|inkonsequent|inkorrekt|interessant|ironisch|irreführend|irrig|irritierend|irrtümlich|klar|klassisch|kleck|klug|komisch|konsequent|kontingent|korrekt|kurios|laienhaft|legitim|leichtsinnig|liebenswürdig|listig|lobenswert|löblich|logisch|lustig|merkwürdig|missverständlich|möglich|naheliegend|naiv|natürlich|nett|normal|notwendig|originell|paradox|passend|pikant|plausibl|praktisch|realistisch|richtig|riskant|schlau|seltsam|sinnig|sinnvoll|solch|sonderbar|traditionell|tragisch|traurig|trickreich|trivial|typisch|unachtsam|unerklärlich|unerlaubt|unerwartet|ungeschickt|unglücklich|unnötig|unstrittig|unverdient|unvermeidlich|unverständlich|unvorsichtig|verboten|verdient|vernünftig|verständlich|widersinnig|wunderbar|wunderlich|zufällig|zulässig|zweckmäßig)er
@@ -8445,6 +8428,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <example correction="möglicherweise">Doch <marker>möglicher Weise</marker> ist die Gelbphase zu kurz eingestellt.</example>
                 <example correction="Möglicherweise"><marker>Möglicher Weise</marker> ist die Gelbphase zu kurz eingestellt.</example>
                 <example>Er hat sich in <marker>lustiger Weise</marker> vorgestellt.</example>
+                <example>Es kann in für jedes Element absolut typischer Weise nachgewiesen werden.</example>
             </rule>
         </rulegroup>
         <rule id="ZU_TEIL" name="'zu Teil (zuteil/zum Teil)'">
@@ -29836,14 +29820,28 @@ Andere Projekte</example>
             <rule>
                 <pattern>
                     <token>mit</token>
-                    <marker><token>den</token></marker>
+                    <marker><token regexp="yes">d(ies)?en|jenen|s?einen|ihren</token></marker>
                     <token postag="SUB:.+:SIN:.+" postag_regexp="yes"><exception  postag="SUB:.+:PLU:.+|.+:INF" postag_regexp="yes"></exception></token>
                 </pattern>
-                <message>Meinten Sie <suggestion>dem</suggestion>? (Alternativ prüfen Sie, ob 'mit' durch 'mir' ersetzt werden muss.)</message>
+                <message>Meinten Sie <suggestion><match no="2" regexp_match="n$" regexp_replace="m"/></suggestion>? (Alternativ prüfen Sie, ob 'mit' durch 'mir' ersetzt werden muss.)</message>
+                <url>http://www.canoo.net/services/OnlineGrammar/Wort/Praeposition/Kasus/Dativ.html</url>
                 <example correction="dem">Mit <marker>den</marker> Rad zur Arbeit.</example>
                 <example>Runter mit <marker>den</marker> Spendierhosen!</example>
                 <example>Ich werde mit <marker>den</marker> Malerarbeiten heute fertig.</example>
                 <example>Mit <marker>den</marker> Lahmen lernt man hinken, mit den Säufern trinken.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token regexp="yes">bei|mitsamt|seit|von</token>
+                    <marker><token regexp="yes">d(ies)?en|jenen|s?einen|ihren</token></marker>
+                    <token postag="SUB:.+:SIN:MAS.*" postag_regexp="yes"><exception  postag="SUB:.+:PLU:.+|.+:INF" postag_regexp="yes"></exception></token>
+                </pattern>
+                <message>Meinten Sie <suggestion><match no="2" regexp_match="n$" regexp_replace="m"/></suggestion>?</message>
+                <url>http://www.canoo.net/services/OnlineGrammar/Wort/Praeposition/Kasus/Dativ.html</url>
+                <example correction="dem">Seit <marker>den</marker> Unfall ist er nicht mehr derselbe.</example>
+                <example correction="ihrem">Sie hat es von <marker>ihren</marker> Mann bekommen.</example>
+                <example correction="diesem">Bei <marker>diesen</marker> Film schlafe ich immer ein.</example>
+                <example>Bei klarem Wetter kann man von hier aus den Berg Fuji sehen.</example>
             </rule>
         </rulegroup>
         <rule id="AN_HERR" name="Präposition/Kasus – 'an/für Herr (Herrn)' etc.">
@@ -30141,7 +30139,7 @@ Andere Projekte</example>
                         <token regexp="yes">weil|obwohl|nachdem</token>
                         <token postag="PRO:PER:NOM:.*" postag_regexp="yes"/>
                         <token postag="VER:[123]:.*PRÄ:.*" postag_regexp="yes">
-                            <exception postag="VER:(INF|EIZ):.*|PA[12]:.*|AD[JV]:.*" postag_regexp="yes"/>
+                            <exception postag="SUB:.+|VER:(INF|EIZ):.*|PA[12]:.*|AD[JV]:.*" postag_regexp="yes"/>
                             <exception inflected="yes" regexp="yes">sieben|achten|einen</exception>
                         </token>
                     </marker>
@@ -30153,6 +30151,7 @@ Andere Projekte</example>
                 <example>Diese Übersetzung gefällt mir, weil ich fühle, dass sie zum Singen geeignet ist.</example>
                 <example>Niemand wird alt, weil er eine bestimmte Anzahl von Jahren gelebt hat.</example>
                 <example>Warum spricht Tom so schlecht Koreanisch, obwohl er eine koreanische Freundin hat?</example>
+                <example>Er tut das, weil er Beweise sammeln muss.</example>
             </rule>
         </rulegroup>
         <rulegroup id="FALSCHES_RELATIVPRONOMEN" name="Relativpronomen mit falschem Genus">

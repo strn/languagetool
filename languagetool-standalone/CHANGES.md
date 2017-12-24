@@ -9,6 +9,7 @@
     ca-ES-valencia.dict (external dependency: catalan-pos-dict 1.6)
 
 #### English
+  * added and improved rules
   * removed the category MISC and moved the rules to more specific categories
   * added WordCoherencyRule
   * added approximately 70 collocation rules contributed by Nicholas Walker (Bokomaru)
@@ -16,6 +17,9 @@
   * updated en_GB spellchecker dictionary from https://github.com/marcoagpinto/aoo-mozilla-en-dict
   * updated en_US spellchecker dictionary
   * updated en_CA spellchecker dictionary
+
+#### French
+  * we now offer suggestions for spelling errors
 
 #### Galician
   * added and improved rules, including:

@@ -179,6 +179,7 @@ public class GermanSpellerRuleTest {
     assertFirstSuggestion("diagnosiere", "diagnostiziere", rule, lt);
     assertFirstSuggestion("diagnoziert", "diagnostiziert", rule, lt);
     assertFirstSuggestion("durschnittliche", "durchschnittliche", rule, lt);
+    assertFirstSuggestion("durschnitliche", "durchschnittliche", rule, lt);
     assertFirstSuggestion("durchnitliche", "durchschnittliche", rule, lt);
     assertFirstSuggestion("Heileit", "Highlight", rule, lt);
     assertFirstSuggestion("todesbedrohende", "lebensbedrohende", rule, lt);
@@ -247,6 +248,7 @@ public class GermanSpellerRuleTest {
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Stil-, Text- oder Grammatikprüfung")).length);
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Miet- und Zinseinkünfte")).length);
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Haupt- und Nebensatz")).length);
+    assertEquals(0, rule.match(lt.getAnalyzedSentence("Vertuschungs- und Bespitzelungsmaßnahmen")).length); // remove "s" from "Vertuschungs" before spell check
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Au-pair-Agentur")).length); // compound with ignored word from spelling.txt
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Netflix-Film")).length); // compound with ignored word from spelling.txt
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Bund-Länder-Kommission")).length);
@@ -292,6 +294,8 @@ public class GermanSpellerRuleTest {
     assertTrue(ruleGermany.doIgnoreWord("Feynmandiagramme"));           // from spelling.txt formed compound
     assertTrue(ruleGermany.doIgnoreWord("Helizitätsoperator"));         // from spelling.txt formed compound
     assertTrue(ruleGermany.doIgnoreWord("Wodkaherstellung"));           // from spelling.txt formed compound
+    assertTrue(ruleGermany.doIgnoreWord("Latte-macchiato-Glas"));       // from spelling.txt formed compound
+    assertTrue(ruleGermany.doIgnoreWord("No-Name-Hersteller"));         // from spelling.txt formed compound
     assertFalse(ruleGermany.doIgnoreWord("Helizitätso"));               // from spelling.txt formed compound (second part is too short)
     assertFalse(ruleGermany.doIgnoreWord("Feynmand"));                  // from spelling.txt formed compound (second part is too short)
     assertFalse(ruleGermany.doIgnoreWord("Hundhütte"));                 // compound formed from two valid words, but still incorrect

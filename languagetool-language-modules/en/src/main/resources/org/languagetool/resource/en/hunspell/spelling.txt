@@ -133,6 +133,7 @@ bitts
 blowdown
 blowdowns
 Blu-ray
+boniface
 boomset
 boomsets
 boomtown
@@ -544,6 +545,8 @@ freeboards
 frictionally
 frictionless
 frictionlessly
+fullerene
+fullerenes
 gappy
 gigaampere
 gigaamperes
@@ -1296,6 +1299,7 @@ ropey
 safetied
 safetying
 Schengen
+Schrödinger
 scintillator
 scintillators
 screencast
