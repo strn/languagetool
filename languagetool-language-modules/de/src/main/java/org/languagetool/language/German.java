@@ -65,6 +65,8 @@ public class German extends Language implements AutoCloseable {
   private CompoundWordTokenizer compoundTokenizer;
   private GermanCompoundTokenizer strictCompoundTokenizer;
   private LanguageModel languageModel;
+  private List<Rule> nnRules;
+  private Word2VecModel word2VecModel;
 
   /**
    * @deprecated use {@link GermanyGerman}, {@link AustrianGerman}, or {@link SwissGerman} instead -
@@ -234,9 +236,13 @@ public class German extends Language implements AutoCloseable {
     return languageModel;
   }
 
+  /** @since 4.0 */
   @Override
   public synchronized Word2VecModel getWord2VecModel(File indexDir) throws IOException {
-    return new Word2VecModel(indexDir + File.separator + getShortCode());
+    if (word2VecModel == null) {
+      word2VecModel = new Word2VecModel(indexDir + File.separator + getShortCode());
+    }
+    return word2VecModel;
   }
 
   /** @since 3.1 */
@@ -250,7 +256,10 @@ public class German extends Language implements AutoCloseable {
   /** @since 4.0 */
   @Override
   public List<Rule> getRelevantWord2VecModelRules(ResourceBundle messages, Word2VecModel word2vecModel) throws IOException {
-    return NeuralNetworkRuleCreator.createRules(messages, this, word2vecModel);
+    if (nnRules == null) {
+      nnRules = NeuralNetworkRuleCreator.createRules(messages, this, word2vecModel);
+    }
+    return nnRules;
   }
 
   /**
@@ -275,6 +284,7 @@ public class German extends Language implements AutoCloseable {
       case "KOMMA_ZWISCHEN_HAUPT_UND_NEBENSATZ": return -10;
       case "OLD_SPELLING_INTERNAL": return 10;
       case "CONFUSION_RULE": return -1;  // probably less specific than the rules from grammar.xml
+      case "ANS_OHNE_APOSTROPH": return 1;
     }
     return 0;
   }

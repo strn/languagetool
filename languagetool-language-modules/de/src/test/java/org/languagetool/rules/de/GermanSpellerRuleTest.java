@@ -170,6 +170,7 @@ public class GermanSpellerRuleTest {
     assertFirstSuggestion("unswar", "und zwar", rule, lt);
     assertFirstSuggestion("fomelare", "Formulare", rule, lt);
     assertFirstSuggestion("inordnung", "in Ordnung", rule, lt);
+    assertFirstSuggestion("inbälde", "in Bälde", rule, lt);
     assertFirstSuggestion("unaufbesichtigt", "unbeaufsichtigt", rule, lt);
     assertFirstSuggestion("uberaschend", "überraschend", rule, lt);
     assertFirstSuggestion("uberagendes", "überragendes", rule, lt);
@@ -181,6 +182,8 @@ public class GermanSpellerRuleTest {
     assertFirstSuggestion("durschnittliche", "durchschnittliche", rule, lt);
     assertFirstSuggestion("durschnitliche", "durchschnittliche", rule, lt);
     assertFirstSuggestion("durchnitliche", "durchschnittliche", rule, lt);
+    assertFirstSuggestion("Durschnittswerte", "Durchschnittswerte", rule, lt);
+    assertFirstSuggestion("Durschnittsbürgers", "Durchschnittsbürgers", rule, lt);
     assertFirstSuggestion("Heileit", "Highlight", rule, lt);
     assertFirstSuggestion("todesbedrohende", "lebensbedrohende", rule, lt);
     assertFirstSuggestion("todesbedrohliches", "lebensbedrohliches", rule, lt);
@@ -192,6 +195,7 @@ public class GermanSpellerRuleTest {
     assertFirstSuggestion("Gruessen", "Grüßen", rule, lt);
     assertFirstSuggestion("Matschscheibe", "Mattscheibe", rule, lt);
     assertFirstSuggestion("Pearl-Harbour", "Pearl Harbor", rule, lt);
+    assertFirstSuggestion("Autonomität", "Autonomie", rule, lt);
     assertFirstSuggestion("Kompatibelkeit", "Kompatibilität", rule, lt);
     assertFirstSuggestion("WiFi-Direkt", "Wi-Fi Direct", rule, lt);
     assertFirstSuggestion("Wi-Fi-Direct", "Wi-Fi Direct", rule, lt);
@@ -201,10 +205,9 @@ public class GermanSpellerRuleTest {
     assertFirstSuggestion("familliarisches", "familiäres", rule, lt);
     assertFirstSuggestion("sommerverie", "Sommerferien", rule, lt);
     assertFirstSuggestion("thelepatie", "Telepathie", rule, lt);
-    assertFirstSuggestion("Durschnittswerte", "Durchschnittswerte", rule, lt);
-    assertFirstSuggestion("Durschnittsbürgers", "Durchschnittsbürgers", rule, lt);
     assertFirstSuggestion("artz", "Arzt", rule, lt);
     assertFirstSuggestion("berücksichtung", "Berücksichtigung", rule, lt);
+    assertFirstSuggestion("okey", "okay", rule, lt);
   }
 
   @Test

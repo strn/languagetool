@@ -72,6 +72,7 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
     put("[aA]wa", w -> Arrays.asList("AWA", "ach was", "aber"));
     put("[aA]lsallerersten?s", w -> Arrays.asList(w.replaceFirst("lsallerersten?s", "ls allererstes"), w.replaceFirst("lsallerersten?s", "ls Allererstes")));
     putRepl("(an|auf|ein)gehangen(e[mnrs]?)?$", "hangen", "hängt");
+    putRepl("[oO]key", "ey$", "ay");
     put("geupdate[dt]$", "upgedatet");
     put("rosane[mnrs]?$", w -> Arrays.asList("rosa", w.replaceFirst("^rosan", "rosafarben")));
     put("Erbung", w -> Arrays.asList("Vererbung", "Erbschaft"));
@@ -96,6 +97,7 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
     putRepl("ubera(g|sch)end(e[nmrs]?)?", "uber", "überr");
     putRepl("[wW]olt$", "lt", "llt");
     putRepl("[zZ]uende", "ue", "u E");
+    putRepl("[iI]nbälde", "nb", "n B");
     putRepl("[lL]etztenendes", "ene", "en E");
     putRepl("[nN]achwievor", "wievor", " wie vor");
     putRepl("[uU]nswar", "swar", "d zwar");
@@ -105,6 +107,7 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
     putRepl("[gG]esetztreu(e[nmrs]?)?", "tz", "tzes");
     putRepl("[wW]ikich(e[nmrs]?)?", "k", "rkl");
     putRepl("[uU]naufbesichtigt(e[nmrs]?)?", "aufbe", "beauf");
+    putRepl("[nN]utzvoll(e[nmrs]?)?", "utzvoll", "ützlich");
     putRepl("Lezte[mnrs]?", "Lez", "Letz");
     putRepl("Makeups?", "up", "-up");
     putRepl("Add-?Ons?", "Add-?On", "Add-on");
@@ -152,6 +155,7 @@ public class GermanSpellerRule extends CompoundAwareHunspellRule {
     put("Wi-?Fi-Dire[ck]t", "Wi-Fi Direct");
     put("gans", "ganz");
     put("Pearl-Harbou?r", "Pearl Harbor");
+    put("[aA]utonomität", "Autonomie");
     put("[kK]ompatibelkeit", "Kompatibilität");
     put("[fF]r[uü]h?st[uü]c?k", "Frühstück");
     put("zucc?h?inis?", "Zucchini");

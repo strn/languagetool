@@ -5229,13 +5229,14 @@ USA
         </rule>
         <!-- Noble Prize::word=Nobel Prize::filter=none -->
         <rule id="NOBLE_PRIZE" name="Noble (Nobel) Prize">
-            <pattern case_sensitive="yes">
-                <token>Noble</token>
-                <token>Prize</token>
+            <pattern>
+                <token case_sensitive="yes">Noble</token>
+                <token regexp="yes">Prizes?|laureates?|committee|peace|foundation|lecture</token>
             </pattern>
-            <message>Did you mean <suggestion>Nobel Prize</suggestion>?</message>
+            <message>Did you mean <suggestion>Nobel <match no="2" regexp_match="^prize" regexp_replace="Prize"/></suggestion>?</message>
             <example correction="Nobel Prize">He was awarded the <marker>Noble Prize</marker> in literature.</example>
             <example>He was awarded the Nobel Prize in physics.</example>
+            <example correction="Nobel Prize">He was awarded the <marker>Noble prize</marker> in literature.</example>
         </rule>
         <!-- land lover::word=landlubber::filter=none -->
         <rule id="LAND_LOVER" name="land lover (landlubber)">
@@ -6788,15 +6789,16 @@ USA
                 </marker>
             </pattern>
             <message>If 'people' is plural here, don't use the third-person singular verb.</message>
-            <suggestion><match no="3" postag_regexp="yes" postag="VBZ" postag_replace="VB"/></suggestion>
+            <suggestion><match no="3" postag_regexp="yes" postag="VBZ" postag_replace="VBP"/></suggestion>
             <example correction='think'>Some people <marker>thinks</marker> that space is endless.</example>
-            <example correction='have'>We are looking for people who <marker>has</marker> expertise in this area.</example>
+            <example correction='have|haven'>We are looking for people who <marker>has</marker> expertise in this area.</example>
             <example correction='do'>Also, these people <marker>does</marker> not know the answer.</example>
             <example>As the number of older, wealthier people <marker>grows</marker>, so does the number of people eager to prey on them.</example>
             <example>I'm one of those people who has trouble sitting still.</example>
             <example>I'm one of the many people who has trouble sitting still.</example>
             <example>Naming these people <marker>does</marker> not imply their agreement.</example>
             <example>Helping people <marker>is</marker> our duty.</example>
+            <example correction="am|are|aren">Our people <marker>is</marker> being encouraged to find any way to avoid the tax.</example>
         </rule>
         <rule id="WE_RB_ARE_VB" name="we + ... + are + base form verb (gerund)">
             <pattern>
@@ -9812,7 +9814,7 @@ USA
                 <short>Possible agreement error</short>
                 <example correction="eats">She asked whether the dog <marker>eat</marker>.</example>
            </rule>
-            <rule>
+           <rule>
                 <pattern>
                     <token regexp="yes">wh(at|ich|o|ose|ere|en|ether)</token>
                     <token postag="DT|PRP\$" postag_regexp="yes"><exception regexp="yes">th[eo]se</exception></token>
@@ -11375,6 +11377,12 @@ USA
                     <token>least</token>
                     <token postag="JJ"/>
                     <token><exception postag="NN.*" postag_regexp="yes"/></token>
+                </antipattern>
+                <antipattern>
+                    <token>principle</token>
+                    <token>of</token>
+                    <token>least</token>
+                    <token>action</token>
                 </antipattern>
                 <pattern>
                     <marker>
@@ -16212,6 +16220,10 @@ USA
                     <token postag="VB." postag_regexp="yes"/>
                 </antipattern>
                 <antipattern>
+                    <token>thus</token>
+                    <token>far</token>
+                </antipattern>
+                <antipattern>
                     <marker><token>however</token></marker>
                     <token postag="JJ"/>
                 </antipattern>
@@ -16261,6 +16273,7 @@ USA
                 <example correction="Alas,"><marker>Alas</marker> James had finals and couldn’t attend.</example>
                 <example>Alas! Her heart belonged to another.</example>
                 <example>Further to this previous point, it is difficult to fully respect a high-ranking business official if their grammar isn’t up to par.</example>
+                <example>Thus far, the tests are in agreement with the observations made.</example>
             </rule>
             <rule>
                 <pattern>
@@ -16989,7 +17002,7 @@ USA
             <pattern>
                 <token><exception postag="VB.*" postag_regexp="yes"/></token>
                 <token postag="PRP"><exception postag="PRP$"/></token>
-                <token min="0" regexp="yes">has|have</token>
+                <token min="0" inflected="yes">have</token>
                 <marker><token>sad</token></marker>
             </pattern>
             <message>Did you mean <suggestion>said</suggestion>?</message>
@@ -16997,6 +17010,16 @@ USA
             <example correction="said">This is exactly what you have <marker>sad</marker> yesterday.</example>
             <example>Are you sad?</example>
             <example>He brought us sad news.</example>
+        </rule>
+        <rule id="MARRY_MERRY" name="marry (merry)">
+            <pattern>
+                <marker>
+                    <token>marry</token>
+                </marker>
+                <token regexp="yes">band|chase|Christmas|group|hell|X-?mas|ways?</token>
+            </pattern>
+            <message>Did you mean <suggestion><match no="1" regexp_match="a" regexp_replace="e"/></suggestion> (=jolly, festive)?</message>
+            <example correction="Merry"><marker>Marry</marker> Christmas!</example>
         </rule>
         <rule id="IN_ON_VACATION" name="in (on) vacation">
             <pattern>

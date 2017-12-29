@@ -130,6 +130,7 @@ bisectional
 bisectionally
 bitt
 bitts
+blackbody radiation
 blowdown
 blowdowns
 Blu-ray
@@ -153,6 +154,7 @@ bunkered
 bunkering
 callout
 callouts
+Caltech
 cancellable
 candela
 candelas
@@ -684,6 +686,7 @@ higgledy-piggledy
 highflier
 highfliers
 homeownership
+hortative
 hp
 hydrophilic
 hydrostatic
@@ -716,6 +719,7 @@ interlaid
 interlay
 interlaying
 interlays
+invariance
 involvedness
 iOS
 iPhone
@@ -1257,6 +1261,9 @@ reinflated
 reinflates
 reinflating
 reinstallation
+renormalize
+renormalized
+renormalization
 repairability
 repeatability
 reposition
@@ -1534,6 +1541,7 @@ utile
 veraciousness
 verboseness
 verifiably
+vespertine
 victimologies
 victimology
 viewport
@@ -1541,6 +1549,7 @@ viewports
 Vinnytsia
 vis-à-vis
 volumetric
+von Neumann
 walkie-talkie
 walkie-talkies
 walkthrough
@@ -1663,6 +1672,7 @@ yottawatt
 yottawatts
 yottaweber
 yottawebers
+youthquake
 Zaporizhia
 zeptoampere
 zeptoamperes
