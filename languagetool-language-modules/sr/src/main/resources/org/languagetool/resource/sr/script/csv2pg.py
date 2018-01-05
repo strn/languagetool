@@ -44,7 +44,7 @@ def parse_args():
         _logger_.error("Unable to open input file '{}', aborting ...".format(_args_.input_file))
         sys.exit(1)
     if not _args_.config_file:
-        _logger_.error("Configuration file (-c) was not specified, aborting ...")
+        _logger_.error("ConfigurationDirectory file (-c) was not specified, aborting ...")
         sys.exit(2)
 
 
@@ -57,7 +57,7 @@ def read_config():
     global _config_
     # Load configuration file
     if not os.path.exists(_args_.config_file):
-        _logger_.error("Configuration file '{}' does not exist, aborting ...".format(_args_.config_file))
+        _logger_.error("ConfigurationDirectory file '{}' does not exist, aborting ...".format(_args_.config_file))
         sys.exit(2)
     _config_ = configparser.ConfigParser()
     _config_.read( _args_.config_file )
