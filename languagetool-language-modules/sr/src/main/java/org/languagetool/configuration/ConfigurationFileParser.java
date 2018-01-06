@@ -18,12 +18,15 @@
  */
 package org.languagetool.configuration;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Parses LT configuration file(s)
+ * JAXB-based LT configuration file parser
  *
  * @author Zoltán Csala
  *
@@ -31,17 +34,65 @@ import java.util.List;
  */
 public class ConfigurationFileParser {
 
-  private final List<String> ruleFiles = new ArrayList<>();
-  private final List<String> dictionaryFiles = new ArrayList<>();
+  private List<String> ruleFiles;
+  private String morfologikWordFile;
+  private JAXBContext jaxbContext;
+  private Unmarshaller jaxbUnmarshaller;
+  private Ltconfiguration ltConf;
 
-  public void parse(final File file) {
+
+  public ConfigurationFileParser() {
+    ruleFiles = new ArrayList<>();
+    morfologikWordFile = null;
+    try {
+      jaxbContext = JAXBContext.newInstance(LTObjectFactory.class);
+      jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+    } catch (JAXBException je) {
+      System.err.println(je.getMessage());
+    }
   }
 
-  public List<String> getDictionaryFiles() {
-    return dictionaryFiles;
+  /**
+   * Parses configuration file, adding items as required
+   *
+   * @param configurationFile
+   */
+  public void parse(final File configurationFile) {
+    try {
+      ltConf = (Ltconfiguration) jaxbUnmarshaller.unmarshal(configurationFile);
+      // Get additional Morfologik dictionary file if it exists
+      if (cfgFileExists(ltConf.getMorfologik().getWordfile())) {
+        morfologikWordFile = ltConf.getMorfologik().getWordfile();
+      }
+      // Check if grammar files are labelled as active, then add them
+      for ( RulefileType ruleFile : ltConf.getGrammar().getRulefiles().getRulefile()) {
+        if ("yes".equals(ruleFile.getActive()) && cfgFileExists(ruleFile.getValue())) {
+          // TODO: Validate grammar file before adding it
+          ruleFiles.add(ruleFile.getValue());
+          //System.out.println("Added user's rule file " + ruleFile.getValue());
+        }
+      }
+    } catch (JAXBException je) {
+      System.err.println(je);
+    }
+  }
+
+  public String getMorfologikWordFile() {
+    return morfologikWordFile;
   }
 
   public List<String> getRuleFiles() {
     return ruleFiles;
+  }
+
+  /**
+   * Checks if file exists and is a real file
+   *
+   * @param filePath
+   * @return
+   */
+  private boolean cfgFileExists(String filePath) {
+    File file = new File(filePath);
+    return (file.exists() && file.isFile());
   }
 }

@@ -34,21 +34,26 @@ import java.util.List;
  */
 public class LocalConfiguration {
 
-  private final String osName = System.getProperty("os.name");
-  private final String fs = File.separator;
   private final List<String> dirList = new ArrayList<>();
-  private List<String> configFilesList = null;
-  private List<String> ruleFiles = null;
-  private List<String> dictionaryFiles = null;
+  private List<String> configFilesList;
+  private List<String> ruleFiles;
+  private String morfologikWordFile;
   private ConfigurationDirectory configDir;
   private String languageCode;
-  private ConfigurationFileParser cfParser = new ConfigurationFileParser();
+  private ConfigurationFileParser cfParser;
 
 
-  LocalConfiguration(final String languageCode) {
+  public LocalConfiguration(final String languageCode) {
 
     this.languageCode = languageCode;
+    morfologikWordFile = null;
+    configFilesList = null;
+    ruleFiles = null;
+    cfParser = new ConfigurationFileParser();
+    String osName = System.getProperty("os.name");
+
     if (osName.contains("Linux") || osName.contains("SunOS") || osName.contains("FreeBSD")) {
+      // Do we need special case for Android?
       configDir = new UNIXConfigurationDirectory();
     } else if (osName.contains("Windows")) {
       configDir = new WindowsConfigurationDirectory();
@@ -63,12 +68,17 @@ public class LocalConfiguration {
     dirList.addAll( configDir.getConfigurationDirectories() );
   }
 
+  /**
+   *
+   * @return List of local configuration files
+   */
   public List<String> getConfigFilesList() {
     if (configFilesList == null) {
       configFilesList = new ArrayList<>();
       String filePath;
       for (final String directory: dirList) {
-        filePath = String.format("%s%sconfiguration-%s.xml", directory, fs, languageCode);
+        filePath = String.format("%s%sconfiguration-%s.xml", directory,
+                File.separator, languageCode);
         configFilesList.add(filePath);
       }
     }
@@ -82,11 +92,11 @@ public class LocalConfiguration {
     return ruleFiles;
   }
 
-  public List<String> getDictionaryFileNames() {
+  public String getMorfologikWordFile() {
     if (areNameListsEmpty()) {
       parseConfigurationFiles();
     }
-    return dictionaryFiles;
+    return morfologikWordFile;
   }
 
   private void parseConfigurationFiles() {
@@ -98,10 +108,10 @@ public class LocalConfiguration {
       }
     }
     ruleFiles = cfParser.getRuleFiles();
-    dictionaryFiles = cfParser.getDictionaryFiles();
+    morfologikWordFile = cfParser.getMorfologikWordFile();
   }
 
   private boolean areNameListsEmpty() {
-    return (ruleFiles == null || dictionaryFiles == null);
+    return (ruleFiles == null || morfologikWordFile == null);
   }
 }

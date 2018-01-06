@@ -23,19 +23,19 @@ import java.util.Locale;
 /** @since 4.0 */
 public class JekavianTagger extends SerbianTagger {
 
-  private static final String DICTIONARY_PATH = BASE_DICTIONARY_PATH + "/jekavian/";
+  private static final String JEKAVIAN_DICTIONARY_PATH = BASE_DICTIONARY_PATH + "jekavian/";
 
   public JekavianTagger() {
-    super(DICTIONARY_PATH + "serbian.dict", new Locale("sr"));
+    super(JEKAVIAN_DICTIONARY_PATH + "serbian.dict", new Locale("sr"));
   }
 
   @Override
   public String getManualAdditionsFileName() {
-    return DICTIONARY_PATH + "added.txt";
+    return JEKAVIAN_DICTIONARY_PATH + "added.txt";
   }
 
   @Override
   public String getManualRemovalsFileName() {
-    return DICTIONARY_PATH + "removed.txt";
+    return JEKAVIAN_DICTIONARY_PATH + "removed.txt";
   }
 }

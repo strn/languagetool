@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema elementFormDefault="qualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:element name="ltconfiguration">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element minOccurs="0" name="grammar" type="grammarType" />
+                <xsd:element minOccurs="0" name="morfologik" type="morfologikType" />
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:complexType name="grammarType">
+        <xsd:sequence>
+            <xsd:element minOccurs="0" name="rulefiles" type="rulefilesType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="rulefilesType">
+        <xsd:sequence>
+            <xsd:element minOccurs="1" maxOccurs="unbounded" name="rulefile" type="rulefileType" />
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="rulefileType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attribute name="active" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="morfologikType">
+        <xsd:sequence>
+            <xsd:element name="wordfile" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>
