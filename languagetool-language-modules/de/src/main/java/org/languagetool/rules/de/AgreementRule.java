@@ -88,7 +88,15 @@ public class AgreementRule extends Rule {
       new PatternTokenBuilder().token("das").build(),
       new PatternTokenBuilder().token("Zufall").build()
     ),
+    Arrays.asList(
+      new PatternTokenBuilder().token("in").build(),
+      new PatternTokenBuilder().tokenRegex("dem|diesem").build(),
+      new PatternTokenBuilder().token("Fall").build(),
+      new PatternTokenBuilder().tokenRegex("(?i:hat(te)?)").build(),
+      new PatternTokenBuilder().token("das").build()
+    ),
     Arrays.asList( // "So hatte das Vorteile|Auswirkungen|Konsequenzen..."
+      new PatternTokenBuilder().posRegex("ADV:.+").build(),
       new PatternTokenBuilder().tokenRegex("(?i:hat(te)?)").build(),
       new PatternTokenBuilder().token("das").build()
     ),
@@ -334,7 +342,6 @@ public class AgreementRule extends Rule {
     "deren",
     "denen",
     "sich",
-    "unser",
     "aller",
     "man",
     "beide",
@@ -385,10 +392,7 @@ public class AgreementRule extends Rule {
       //defaulting to the first reading
       //TODO: check for all readings
       String posToken = tokens[i].getAnalyzedToken(0).getPOSTag();
-      if (posToken != null && posToken.equals(JLanguageTool.SENTENCE_START_TAGNAME)) {
-        continue;
-      }
-      if (tokens[i].isImmunized()) {
+      if (JLanguageTool.SENTENCE_START_TAGNAME.equals(posToken) || tokens[i].isImmunized()) {
         continue;
       }
 
@@ -713,7 +717,7 @@ public class AgreementRule extends Rule {
 
   private boolean possessiveSpecialCase(AnalyzedTokenReadings aToken, AnalyzedToken tmpReading) {
     // would cause error misses as it contains 'ALG', e.g. in "Der Zustand meiner Gehirns."
-    return aToken.hasPartialPosTag("PRO:POS") && ("ich".equals(tmpReading.getLemma()) || "sich".equals(tmpReading.getLemma()));
+    return aToken.hasPartialPosTag("PRO:POS") && StringUtils.equalsAny(tmpReading.getLemma(), "ich", "sich");
   }
 
   private String makeString(GermanToken.Kasus casus, GermanToken.Numerus num, GermanToken.Genus gen,

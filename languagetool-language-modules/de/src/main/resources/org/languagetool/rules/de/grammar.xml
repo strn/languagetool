@@ -374,17 +374,29 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
             <message>Meinten Sie <suggestion>Finger</suggestion>?</message>
             <example correction="Finger">Sie hat ihn ganz schön um den <marker>Finder</marker> gewickelt.</example>
         </rule>
-        <rule id="SEIHE_UNTEN" name="seihe (siehe) unten">
-        <!-- 'Seihen' ist ein (nicht sehr häufiges) Verb -->
-            <pattern>
-                <marker>
-                    <token>seihe</token>
-                </marker>
-                <token regexp="yes">unten|oben|Kapitel|Folge|Abs(atz|chnitt)|Seite|nächste[ns]?|folgende[ns]?</token>
-            </pattern>
-            <message>Meinten Sie <suggestion>siehe</suggestion>?</message>
-            <example correction="Siehe">"<marker>Seihe</marker> unten", meinte er trocken, als der Stift vom Tisch rollte.</example>
-        </rule>
+        <rulegroup id="SEIHE_UNTEN" name="seihe (siehe) unten">
+            <rule>
+                <!-- 'Seihen' ist ein (nicht sehr häufiges) Verb -->
+                <pattern>
+                    <marker>
+                        <token regexp="yes">seihe|siege</token>
+                    </marker>
+                    <token regexp="yes">unten|oben|Kapitel|Folge|Abs(atz|chnitt)|Anhang|Seite|nächste[ns]?|folgende[ns]?</token>
+                </pattern>
+                <message>Meinten Sie <suggestion>siehe</suggestion>?</message>
+                <example correction="Siehe">"<marker>Seihe</marker> unten", meinte er trocken, als der Stift vom Tisch rollte.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token>(</token>
+                    <marker>
+                        <token regexp="yes" case_sensitive="yes">seihe|siege</token>
+                    </marker>
+                </pattern>
+                <message>Meinten Sie <suggestion>siehe</suggestion>?</message>
+                <example correction="siehe">Diese Aussage (<marker>siege</marker> Anhang) belastete sie schwer.</example>
+            </rule>
+        </rulegroup>
         <rule id="ANS_HERZ_GEWASCHEN" name="ans Herz gewaschen (gewachsen)">
             <pattern>
                 <token>ans</token>
@@ -10711,6 +10723,42 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
                 <message>Dieser Monat hat nur 30 Tage.</message>
                 <example correction="">Es geschah am <marker>31. November</marker>.</example>
                 <example>Es geschah am <marker>30. November</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token regexp="yes">3[2-9]|[4-9][0-9]|[1-9][0-9][0-9]+</token>
+                    <token>.</token>
+                    <token regexp="yes">&monate;|&abgekMonate;</token>
+                </pattern>
+                <message>Tippfehler im Datum? Kein Monat hat mehr als 31 Tage.</message>
+                <example correction="">Es geschah am <marker>32. Januar</marker>.</example>
+                <example correction="">Es geschah am <marker>300. Januar</marker>.</example>
+                <example>Es geschah am <marker>31. Januar</marker>.</example>
+                <example>Es geschah am <marker>30. Januar</marker>.</example>
+                <example>Es geschah am <marker>20. Januar</marker>.</example>
+                <example>Es geschah am <marker>2. Januar</marker>.</example>
+            </rule>
+            <rule>
+                <pattern>
+                    <token regexp="yes">am|zum|den|dem|ab|bis|seit|vom|\(|:|,|-|–</token>
+                    <marker>
+                        <token regexp="yes">3[2-9]|[4-9][0-9]|[1-9][0-9][0-9]+</token>
+                    </marker>
+                    <token spacebefore="no">.</token>
+                    <token regexp="yes">0?[1-9]|10|11|12</token>
+                    <token spacebefore="no">.</token>
+                </pattern>
+                <message>Tippfehler im Datum? Kein Monat hat mehr als 31 Tage.</message>
+                <example correction="">Es geschah am <marker>32</marker>.01..</example>
+                <example correction="">Es geschah am <marker>32</marker>.1.</example>
+                <example correction="">Es geschah am <marker>32</marker>.1.2018.</example>
+                <example correction="">Es geschah am <marker>300</marker>.12.</example>
+                <example>Es geschah am <marker>31</marker>.1.</example>
+                <example>Es geschah am <marker>31</marker>.01.</example>
+                <example>Es geschah am <marker>31</marker>.01.2017</example>
+                <example>Es geschah am <marker>30</marker>.10.</example>
+                <example>Es geschah am <marker>2</marker>.10.</example>
+                <example>Es geschah am <marker>1</marker>.10.</example>
             </rule>
             <rule>
                 <pattern>
@@ -36216,6 +36264,15 @@ Andere Projekte</example>
             <url>http://www.duden.de/sprachwissen/rechtschreibregeln/komma</url>
             <rule>
                 <antipattern>
+                    <token postag="SENT_START"/>
+                    <token>Sehr</token>
+                    <token regexp="yes">geehrter?</token>
+                </antipattern>                
+                <antipattern>
+                    <token postag="SENT_START"/>
+                    <token regexp="yes">Lieber?</token>
+                </antipattern>                
+                <antipattern>
                     <token skip="-1" postag="SENT_START">
                         <exception scope="next" postag="VER:.*" postag_regexp="yes"/>
                     </token>
@@ -36343,6 +36400,7 @@ Andere Projekte</example>
                 <example>Staaten wie Südkorea, Singapur und Brasilien signalisierten ihre Zustimmung.</example>
                 <example>Der Süßwassermangel, mit dem wir weltweit konfrontiert sein werden, rührt von großer Verschwendung her.</example>
                 <example>Was immer das in drei, fünf oder zehn Jahren bedeuten mag.</example>
+                <example>Sehr geehrte Frau Schmidt, zum 20. Jahrestag Ihrer Firma gratulieren wir Ihnen recht herzlich!</example>
             </rule>
         </rulegroup>
         <rulegroup id="KOMMA_VOR_INFINITIVGRUPPEN_OPT" name="Optional: Komma vor Infinitivgruppen" default="off">

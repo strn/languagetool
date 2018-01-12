@@ -42,6 +42,19 @@ USA
     <!-- Possible typo -->
     <!-- ====================================================================== -->
     <category id="TYPOS" name="Possible Typo" type="misspelling">
+        <rule id="APOS_RE" name="we'Re' (we're) etc">
+         <pattern>
+          <marker>
+          <token regexp="yes">you|we|they</token>
+          <token regexp="yes">['’]</token>
+          <token case_sensitive="yes" regexp="yes">Re|RE</token>
+          </marker>
+         </pattern>
+         <message>Did you mean <suggestion>\1\2re</suggestion>?</message>
+         <short>Possible typo</short>
+         <example correction='We&apos;re'><marker>We'Re</marker> looking forward to our meeting.</example>         
+         <example correction='We&apos;re'><marker>We'RE</marker> looking forward to our meeting.</example>         
+        </rule>
         <rule id="AS_FOLLOW_AS_FOLLOWS" name="'as follow' (as follows)">
          <pattern>
           <marker>
@@ -15069,20 +15082,147 @@ USA
       <message>The usual preposition for "yell" is "at." Revise: <suggestion>\1 at \3</suggestion>.</message>
       <example correction='yelled at him'>Lily <marker>yelled on him</marker>.</example>
     </rule>
-  </rulegroup>
-
-    <rule id='GOOD_IN_AT_GERUND' name='Collocation: good in/at'>
+    <rule id='TANKING_INTO_CONSIDERATION' name='Collocation: takes into consideration (of)'>
     <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
       <pattern>
-          <token>good</token>
-          <token>in</token>
-          <token postag="VBG"/>
+          <token inflected="yes">take</token>
+          <token>into</token>
+          <token>consideration</token>
+          <token>of</token>
       </pattern>
-      <message>The usual preposition for this expression is "at". Did you mean, <suggestion>\1 at \3</suggestion>?</message>
+      <message>You have fused two expressions into one, "in consideration of" and "taking into consideration." Remove the word "of" from the end: <suggestion>\1 \2 \3</suggestion>.</message>
+      <example correction='takes into consideration'>Tom <marker>takes into consideration of</marker> all the perspectives.</example>
+    </rule>
+    <rule id='IN_FROM_THE_PRESPECTIVE' name='Collocation: in/from the prespective'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token>in</token>
+          <token regexp="yes">the|a</token>
+          <token postag="JJ"/>
+          <token>perspective</token>
+      </pattern>
+      <message>The usual preposition for "perspective" is "from" not "in." <suggestion>from \2 \3 \4</suggestion>.</message>
+      <example correction='From the psychological perspective'><marker>In the psychological perspective</marker>.</example>
+    </rule>
+    <rule id='SIT_ON_THE_COURT' name='Collocation: sit on the court/bench'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">sit</token>
+          <token regexp='yes'>[io]n</token>
+          <token>the</token>
+          <token>court</token>
+      </pattern>
+      <message>The usual way to express a judge's association with a courtroom is with the phrase  <suggestion>\1 on the bench</suggestion>.</message>
+      <example correction='sits on the bench'>He is 67 year old and he <marker>sits on the court</marker> since 1998..</example>
+    </rule>
+    <rule id='FOLLOW_A_COURSE' name='Collocation: follow/take a course'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">follow</token>
+          <token postag_regexp="yes" postag="PRP\$|DT"/>
+          <token regexp="yes">courses|course</token>
+      </pattern>
+      <message>The usual verb for "courses" in a school is "take" or "attend" not "follow." Try it like this:  <suggestion>take \2 courses</suggestion>.</message>
+      <example correction='take their courses'>There is classes were students can <marker>follow their courses</marker>.</example>
+    </rule>
+    <rule id='ON_IN_THE_AFTERNOON' name='Collocation: on/in the afternoon'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <marker>
+          <token>on</token>
+          <token>the</token>
+          <token regexp="yes">afternoon|evening</token>
+          </marker>
+          <token>
+            <exception regexp="yes">of|that|program|train|bus|coach|cruise</exception></token>
+      </pattern>
+      <message>The usual preposition for "\3" is 'in' not "on". Try it like this:  <suggestion>in \2 \3</suggestion>.</message>
+      <example correction='in the afternoon'>The meeting is <marker>on the afternoon</marker>.</example>
+    </rule>
+    <rule id='ACCUSE_FOR_OFF' name='Collocation: accuse for/of'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">accuse</token>
+          <token>the</token>
+          <token/>
+          <token>for</token>
+      </pattern>
+      <message>The usual preposition for accusations is "of" not "for." Try it like this:  <suggestion>\1 the \3 of</suggestion>.</message>
+      <example correction='accused the man of'>She <marker>accused the man for</marker> stealing.</example>
+    </rule>
+  </rulegroup>
+
+  <rulegroup id='IN_ON_THE_TEAM' name='Collocation: in/on the team'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
       <url>http://www.kentlee7.com/writ/collocation.errors.typical.pdf</url>
       <short>Collocation error</short>
-      <example correction='good at swimming'>He is <marker>good in swimming</marker>.</example>
+    <rule>
+      <pattern>
+          <token>in</token>
+          <token>the</token>
+          <token regexp="yes">men|women|school</token>
+          <token regexp="yes">'|‘|’|`</token>
+          <token>s</token>
+          <token>team</token>
+      </pattern>
+      <message>The usual preposition for team membership is "on" not "in". Try it like this:  <suggestion>on \2 \3's \6</suggestion>.</message>
+      <example correction="on the men's team"><marker>in the men's team</marker>.</example>
     </rule>
+    <rule>
+      <pattern>
+          <token>in</token>
+          <token>the</token>
+          <token regexp="yes">men|women|school</token>
+          <token regexp="yes">'|‘|’|`</token>
+          <token>s</token>
+          <token/>
+          <token>team</token>
+      </pattern>
+      <message>The usual preposition for team membership is "on" not "in". Try it like this:  <suggestion>on \2 \3's \6 \7</suggestion>.</message>
+      <example correction="on the men's basketball team"><marker>in the men's basketball team</marker>.</example>
+    </rule>
+    <rule>
+      <pattern>
+          <token>in</token>
+          <token>the</token>
+          <token regexp="yes">men|women|school</token>
+          <token regexp="yes">'|‘|’|`</token>
+          <token>s</token>
+          <token/>
+          <token>ball</token>
+          <token>team</token>
+      </pattern>
+      <message>The usual preposition for team membership is "on" not "in". Try it like this:  <suggestion>on \2 \3's \6 \7 \8</suggestion>.</message>
+      <example correction="on the men's basket ball team"><marker>in the men's basket ball team</marker>.</example>
+    </rule>
+  </rulegroup>
+
+  <rulegroup id='ARRIVAL_TO_THE_HOUSE' name='Collocation: arrival to/in the house'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <url>http://www.kentlee7.com/writ/collocation.errors.typical.pdf</url>
+      <short>Collocation error</short>
+    <rule>
+      <pattern>
+          <token>arrival</token>
+          <token>to</token>
+          <token>the</token>
+          <token>
+            <exception regexp="yes">house|apartment|penthouse|boat</exception></token>
+      </pattern>
+      <message>The usual preposition for "\3 \4" is "in" not "to." Try it like this:  <suggestion>\1 in the \4</suggestion>.</message>
+      <example correction='arrival in the city'>Their <marker>arrival to the city</marker> will be at one o'clock.</example>
+    </rule>
+    <rule>
+      <pattern>
+          <token>arrival</token>
+          <token regexp='yes'>in|to</token>
+          <token>the</token>
+          <token regexp="yes">house|apartment|penthouse</token>
+      </pattern>
+      <message>The usual preposition for "\3 \4" is "at" not "to." Try it like this:  <suggestion>\1 at the \4</suggestion>.</message>
+      <example correction='arrival at the house'>At that time, their <marker>arrival to the house</marker> was a surprise.</example>
+    </rule>
+  </rulegroup>
 
   <rulegroup id='GOOD_IN_AT' name='Collocation: Good in/at'>
     <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
@@ -15185,6 +15325,16 @@ USA
       </pattern>
       <message>Use "good at" to mean "skilled" with school subjects. Try this: <suggestion>\1 at \3</suggestion>.</message>
       <example correction='good at math'>I'm <marker>good in math</marker>. I was good in running errands.</example>
+    </rule>
+    <rule id='GOOD_IN_AT_GERUND' name='Collocation: good in/at'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token>good</token>
+          <token>in</token>
+          <token postag="VBG"/>
+      </pattern>
+      <message>The usual preposition for this expression is "at". Did you mean, <suggestion>\1 at \3</suggestion>?</message>
+      <example correction='good at swimming'>He is <marker>good in swimming</marker>.</example>
     </rule>
   </rulegroup>
 
