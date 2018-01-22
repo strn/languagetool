@@ -48,7 +48,7 @@ public class EkavianDisambiguationRuleTest extends DisambiguationRuleTest {
 
   @Test
   public void testChunker() throws IOException {
-    //TestTools.myAssert("Нови Сад, мој град.", "", tokenizer, sentenceTokenizer, tagger, disambiguator);
-    //TestTools.myAssert("Остао сам у Новом Саду.", "", tokenizer, sentenceTokenizer, tagger, disambiguator);
+    TestTools.myAssert("Нови Сад, мој град.", "/[null]SENT_START Нови/[Нови Сад]<IM:VL:MU:0J:NO>|Нови/[нов]PR:OP:PO:MU:0J:AK:ST|Нови/[нов]PR:OP:PO:MU:0J:NO:OR|Нови/[нов]PR:OP:PO:MU:0J:VO:OR|Нови/[нов]PR:OP:PO:MU:0M:NO:OR|Нови/[нов]PR:OP:PO:MU:0M:VO:OR|Нови/[нова]IM:ZA:ZE:0J:DA|Нови/[нова]IM:ZA:ZE:0J:LO  /[null]null Сад/[Нови Сад]</IM:VL:MU:0J:NO>|Сад/[сад]PL:GN:PO ,/[null]null  /[null]null мој/[мој]ZM:PS:1L:MU:0J:AK:ST|мој/[мој]ZM:PS:1L:MU:0J:NO|мој/[мој]ZM:PS:1L:MU:0J:VO  /[null]null град/[град]IM:ZA:MU:0J:AK:ST|град/[град]IM:ZA:MU:0J:NO ./[null]null", tokenizer, sentenceTokenizer, tagger, disambiguator);
+    TestTools.myAssert("Остао сам у Новом Саду.", "/[null]SENT_START Остао/[остати]GL:GV:RA:0:0J:MU  /[null]null сам/[сам]PR:OP:PO:MU:0J:AK:ST|сам/[сам]PR:OP:PO:MU:0J:NO:NE|сам/[сам]PR:OP:PO:MU:0J:VO:NE|сам/[јесам]GL:PM:PZ:1L:0J  /[null]null у/[у]PE:AK|у/[у]PE:GE|у/[у]PE:LO  /[null]null Новом/[Новом Саду]<IM:VL:MU:0J:LO>|Новом/[нов]PR:OP:PO:MU:0J:DA:OR|Новом/[нов]PR:OP:PO:MU:0J:LO:OR|Новом/[нов]PR:OP:PO:SR:0J:DA:OR|Новом/[нов]PR:OP:PO:SR:0J:LO:OR|Новом/[нов]PR:OP:PO:ZE:0J:IS:OR|Новом/[нова]IM:ZA:ZE:0J:IN  /[null]null Саду/[Новом Саду]</IM:VL:MU:0J:LO> ./[null]null", tokenizer, sentenceTokenizer, tagger, disambiguator);
   }
 }
