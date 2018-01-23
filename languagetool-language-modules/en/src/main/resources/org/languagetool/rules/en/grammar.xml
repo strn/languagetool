@@ -42,19 +42,44 @@ USA
     <!-- Possible typo -->
     <!-- ====================================================================== -->
     <category id="TYPOS" name="Possible Typo" type="misspelling">
-        <rule id="APOS_RE" name="we'Re' (we're) etc">
-         <pattern>
-          <marker>
-          <token regexp="yes">you|we|they</token>
-          <token regexp="yes">['’]</token>
-          <token case_sensitive="yes" regexp="yes">Re|RE</token>
-          </marker>
-         </pattern>
-         <message>Did you mean <suggestion>\1\2re</suggestion>?</message>
-         <short>Possible typo</short>
-         <example correction='We&apos;re'><marker>We'Re</marker> looking forward to our meeting.</example>         
-         <example correction='We&apos;re'><marker>We'RE</marker> looking forward to our meeting.</example>         
+        <rule id="HALO_HALLO" name="Halo (Hallo)">
+            <pattern>
+                <token postag="SENT_START"/>
+                <marker>
+                    <token>Halo</token>
+                </marker>
+            </pattern>
+            <message>Did you mean <suggestion>Hallo</suggestion>, the greeting? A halo is an optical phenomenon.</message>
+            <short>Possible typo</short>
+            <example correction="Hallo"><marker>Halo</marker> John!</example>
         </rule>
+        <rulegroup id="APOS_RE" name="we'Re' (we're) etc">
+          <rule>
+            <pattern>
+              <marker>
+                <token regexp="yes">you|we|they|who</token>
+                <token regexp="yes">['’]</token>
+                <token case_sensitive="yes" regexp="yes">Re|RE</token>
+              </marker>
+            </pattern>
+            <message>Did you mean <suggestion>\1\2re</suggestion>?</message>
+            <short>Possible typo</short>
+            <example correction='We&apos;re'><marker>We'Re</marker> looking forward to our meeting.</example>         
+            <example correction='We&apos;re'><marker>We'RE</marker> looking forward to our meeting.</example>         
+          </rule>
+          <rule>
+            <pattern>
+              <marker>
+                <token regexp="yes">isn|aren|wasn|weren|don|doesn|didn|can|couldn|mayn|mightn|mustn|needn|oughtn|shan|shouldn|usedn|won|wouldn</token>
+                <token regexp="yes">['’]</token>
+                <token case_sensitive="yes">T</token>
+              </marker>
+            </pattern>
+            <message>Did you mean <suggestion>\1\2t</suggestion>?</message>
+            <short>Possible typo</short>
+            <example correction='don&apos;t'>We <marker>don'T</marker> need this.</example>         
+          </rule>
+        </rulegroup>
         <rule id="AS_FOLLOW_AS_FOLLOWS" name="'as follow' (as follows)">
          <pattern>
           <marker>
@@ -1220,7 +1245,7 @@ USA
         </rule>
         <rule id="YOUR_S" name="your's (yours)" type="typographical">
             <pattern>
-                <token regexp="yes">your|hers|our|their</token>
+                <token regexp="yes">your|hers?|our|their</token>
                 <token spacebefore="no" regexp="yes">['’]</token>
                 <token>s</token>
             </pattern>
@@ -14994,6 +15019,156 @@ USA
       <message>The usual preposition for "\1" is "at." Revise: <suggestion>\1 at \3</suggestion>.</message>
       <example correction='growled at him'>Dr. Dre <marker>growled to him</marker> about the snow.</example>
     </rule>
+    <rule id='TO_ON_A_TRIP' name='Collocation: to/on a trip'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">go</token>
+          <token>to</token>
+          <token>a</token>
+          <token>trip</token>
+      </pattern>
+      <message>The usual collocation for "\2" and "a trip" is "\2 on a trip". Did you mean <suggestion>\1 on a trip</suggestion>?</message>
+      <example correction='went on a trip'>Yes, I <marker>went to a trip</marker>.</example>
+    </rule>
+    <rule id='IN_ON_A_TRIP' name='Collocation: in/on a trip'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+        <marker>
+          <token>in</token>
+          <token postag="PRP$"/>
+          <token regexp="yes">tr(?:ip|avel)s?</token>
+        </marker>
+          <token>,</token>
+      </pattern>
+      <message>The usual collocation for "\2 \3" is <suggestion>on \2 \3</suggestion> or <suggestion>during \2 \3</suggestion>.</message>
+      <example correction='on his trip|during his trip'>It was is <marker>in his trip</marker>, that he met her.</example>
+    </rule>
+    <rule id='THINK_IN_ABOUT' name='Collocation: think on/about'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+        <marker>
+          <token inflected='yes'>think</token>
+          <token regexp='yes'>[io]n</token>
+        </marker>
+          <token regexp="yes">finish|finishing</token>
+          <token postag="DT"/>
+      </pattern>
+      <message>The usual collocations for "\1" are <suggestion>\1 about</suggestion> or <suggestion>\1 of</suggestion>.</message>
+      <example correction='thinking about|thinking of'>I'm <marker>thinking in</marker> finish this text.</example>
+    </rule>
+    <rule id='RESPONSIBLE_OF_FOR' name='Collocation: responsible of/for'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token regexp="yes">respons[ai]bles?</token>
+          <token>of</token>
+      </pattern>
+      <message>The usual collocations for "\1" is "\1 for". Did you mean <suggestion>\1 for</suggestion> or <suggestion>in charge of</suggestion>?</message>
+      <example correction='responsable for|in charge of'>I am <marker>responsable of</marker> marketing.</example>
+    </rule>
+    <rule id='WAIT_AFTER_FOR' name='Collocation: '>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">wait</token>
+          <token>after</token>
+          <token postag="PRP"/>
+      </pattern>
+      <message>The usual collocations for "\1" is "\1 on," meaning act as an attendant to someone, or "\1 for" meaning to remain patiently inactive. Did you mean <suggestion>\1 for \3</suggestion>.</message>
+      <example correction='waiting for her'>I am <marker>waiting after her</marker>.</example>
+    </rule>
+    <rule id='ON_IN_A_HOSPITAL_BED' name='Collocation: on/in a hospital bed'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">be</token>
+        <marker>
+          <token>on</token>
+          <token>a</token>
+          <token>hospital</token>
+          <token>bed</token>
+        </marker>
+      </pattern>
+      <message>The usual preposition with "\5" is "in". Did you mean <suggestion>in a hospital bed</suggestion>.</message>
+      <example correction='in a hospital bed'>The patient is <marker>on a hospital bed</marker> waiting for surgery.</example>
+    </rule>
+        <rule id='LIVE_FROM_OFF' name='Collocation: live from/off'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+        <marker>
+          <token inflected="yes">live</token>
+          <token>from</token>
+        </marker>
+          <token postag="PRP$" min='0'/>
+          <token min='0'>
+            <exception postag="PRP$"/></token>
+          <token regexp="yes" min='0'>'|‘|’|`</token>
+          <token min='0'>s</token>
+          <token>money</token>
+      </pattern>
+      <message>The usual preposition with "\1" and "\7" is "off". Did you mean <suggestion>\1 off</suggestion>.</message>
+      <example correction="lives off">He <marker>lives from</marker> his brother’s money.</example>
+    </rule>
+    <rule id='ANXIOUS_OF_ABOUT' name='Collocation: anxious of/about'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+        <marker>
+          <token>anxious</token>
+          <token regexp="yes">of|for</token>
+        </marker>
+          <token postag="PRP$"/>
+      </pattern>
+      <message>The usual preposition with "\1" is "about". Did you mean <suggestion>anxious about</suggestion>.</message>
+      <example correction='anxious about'>They are <marker>anxious for</marker> his health.</example>
+      <example correction='anxious about'>Parents are <marker>anxious for</marker> their children’s success.</example>
+    </rule>
+    <rule id='BE_ON_IN_SHOCK' name='Collocation: be on/in shock'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">be</token>
+          <token>on</token>
+          <token>shock</token>
+      </pattern>
+      <message>The usual preposition with "\3" is "in". Did you mean <suggestion>\1 in shock</suggestion>.</message>
+      <example correction='were in shock'>We <marker>were on shock</marker> when it happen..</example>
+    </rule>
+    <rule id='ENTER_IN' name='Collocation: enter in'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">enter</token>
+          <token>in</token>
+          <token postag="DT"/>
+          <token>
+            <exception regexp="yes">space|book|file</exception></token>
+      </pattern>
+      <message>There isn't usually a preposition after "\1". Did you mean <suggestion>\1 \3 \4</suggestion>.</message>
+      <example correction='entering the room'>While he was <marker>entering in the room</marker>, he felt an uncomfortable feeling on his spine.</example>
+      <example>The record is <marker>entered in a book</marker>.</example>
+    </rule>
+    <rule id='GO_TO_HOME' name='Collocation: '>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <antipattern>
+          <token>home</token>
+          <token>base</token>
+      </antipattern>
+      <pattern>
+          <token inflected="yes">go</token>
+          <token>to</token>
+          <token regexp='yes'>home|upstairs|downstairs|downtown|inside|outside|here|there|back|away|near|close|abroad|overseas|everywhere|somewhere|nowhere|underground</token>
+      </pattern>
+      <message>There isn't usually a preposition before "\3". Did you mean <suggestion>\1 \3</suggestion>.</message>
+      <example correction='went home'>Suzie <marker>went to home</marker>.</example>
+      <example>Carry <marker>went to home base</marker>.</example>
+    </rule>
+    <rule id='CAME_IN_INTO' name='Collocation: came in/into'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token/>
+          <token>came</token>
+          <token>in</token>
+          <token>the</token>
+          <token regexp="yes">h(?:all|ouse)|living(?:room)?|kitchen|b(?:ed|ath)room|dining(?:room)?</token>
+      </pattern>
+      <message>The usual proposition after "\2" is "into" not "\3". The sentence "\1 \2 \3 \4 \5" is a colloquial expression for "\1 had an orgasm in the \5". Did you mean <suggestion>\1 \2 into \4 \5</suggestion>, meaning "\1 arrived"?</message>
+      <example correction='Judy came into the house'><marker>Judy came in the house</marker> after greeting her elders.</example>
+    </rule>
   </rulegroup>
 
   <rulegroup id='DURING_OVER_THE_WEEKENDS' name='Collocation: during/over the weekends'>
@@ -15214,8 +15389,60 @@ USA
       <message>The usual preposition for "in front" is "of". Did you mean <suggestion>in front of</suggestion>?</message>
       <example correction='In front of'><marker>In front to</marker> so many decisions, the people are fed up.</example>
     </rule>
-    <rule id='A_TRIP_IN_TO' name='Collocation: a trip in/to'>
+    <rule id='DEPARTURE_OF_FROM' name='Collocation: departure of/from'>
     <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+        <marker>
+          <token>departure</token>
+          <token>of</token>
+        </marker>
+          <token>New</token>
+          <token regexp="yes">York|Zealand|Hampshire|England|South|Brunswick</token>
+          <token>
+            <exception regexp="yes">resident|citizen|native</exception></token>
+      </pattern>
+      <message>The usual preposition for "departure" with a destination name is "from". Did you mean <suggestion>departure from</suggestion>?</message>
+      <example correction='departure from'>The stay is finally ended and they prepared their <marker>departure of</marker> New York.</example>
+    </rule>
+    <rule id='LIVE_IN_ON_PLANET' name='Collocation: live in/on planet'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token inflected="yes">live</token>
+          <token>in</token>
+          <token min='0' postag="DT"/>
+          <token case_sensitive='yes' regexp="yes">[Pp]lanet|[Aa]steroid|[Mm]oon|Mercury|Venus|Earth|Mars|Jupiter|Saturn|Neptune|Uranus|Pluto</token>
+      </pattern>
+      <message>The usual preposition for \4 is "on". Did you mean <suggestion>\1 on <match no='3' include_skipped='all'/> \4</suggestion>?</message>
+      <example correction='live on the planet'>Not all creatures that <marker>live in the planet</marker> Earth use oxygen.</example>
+    </rule>
+    <rule id='COUNTLESS_OF' name='Collocation: countless of'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token>countless</token>
+          <token>of</token>
+          <token>
+            <exception>course</exception></token>
+      </pattern>
+      <message>Do not use "of" after "\1". Did you mean <suggestion>\1 \3</suggestion>?</message>
+      <example correction='countless occurrences'>There are <marker>countless of occurrences</marker>.</example>
+    </rule>
+    <rule id='FED_UP_OF_WITH' name='Collocation: fed up of/with'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <pattern>
+          <token>fed</token>
+          <token>up</token>
+          <token>of</token>
+      </pattern>
+      <message>The usual preposition for "\1 \2" is "with". Did you mean <suggestion>\1 \2 with</suggestion>?</message>
+      <example correction='fed up with'>The people are <marker>fed up of</marker> so many pointless elections.</example>
+    </rule>
+  </rulegroup>
+
+  <rulegroup id='A_TRIP_TO' name='Collocation: a trip to'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+      <url>http://www.kentlee7.com/writ/collocation.errors.typical.pdf</url>
+      <short>Collocation error</short>
+    <rule>
       <pattern>
         <marker>
           <token>a</token>
@@ -15228,10 +15455,76 @@ USA
       <message>The usual preposition for "a \2" with a named destination is "to". Did you mean <suggestion>a trip to</suggestion>?</message>
       <example correction='a trip to'>John and Jenny week decided to go on <marker>a trip in</marker> New York.</example>
     </rule>
+    <rule>
+      <pattern>
+        <marker>
+          <token>a</token>
+          <token regexp="yes">trip|journey</token>
+          <token>in</token>
+        </marker>
+          <token regexp="yes">[A-Z][a-z]+</token>
+          <token>
+            <exception regexp="yes">[A-Z][a-z]+</exception></token>
+      </pattern>
+      <message>The usual preposition for "a \2" with a named destination is "to". Did you mean <suggestion>a trip to</suggestion>?</message>
+      <example correction='a trip to'>John and Jenny week decided to go on <marker>a trip in</marker> York.</example>
+    </rule>
+    <rule>
+      <pattern>
+        <marker>
+          <token>a</token>
+          <token regexp="yes">trip|journey</token>
+          <token>in</token>
+        </marker>
+          <token regexp="yes">New-York|New-England</token>
+      </pattern>
+      <message>The usual preposition for "a \2" with a named destination is "to". Did you mean <suggestion>a trip to</suggestion>?</message>
+      <example correction='a trip to'>John and Jenny week decided to go on <marker>a trip in</marker> New-York.</example>
+    </rule>
+  </rulegroup>
+
+  <rulegroup id='LISTEN_TO_MOVIES' name='Collocation: listen to/watch movies'>
+    <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+    <!-- https://forum.languagetool.org/t/en-english-collocation-rules-to-contribute-to-lt/2318 -->
+      <url>http://www.kentlee7.com/writ/collocation.errors.typical.pdf</url>
+      <short>Collocation error</short>
+    <rule>
+      <pattern>
+          <token inflected="yes">listen</token>
+          <token>to</token>
+          <token regexp="yes">movies|films</token>
+      </pattern>
+      <message>The usual verb for "\3" is "watch". Did you mean <suggestion>watch \3</suggestion>?</message>
+      <example correction='watch movies'>During my free time, I like <marker>listen to movies</marker> in cinema with my boyfriend and my friends.</example>
+    </rule>
+    <rule>
+      <pattern>
+          <token inflected="yes">listen</token>
+          <token min='0'>to</token>
+          <token min='0'>a</token>
+          <token regexp="yes">movie|film|series</token>
+      </pattern>
+      <message>The usual verb for "\3" is "watch". Did you mean <suggestion>watch a \4</suggestion>?</message>
+      <example correction='watch a movie'>During my free time, I like <marker>listen to movie</marker> with my boyfriend and my friends.</example>
+      <example correction='watch a movie'>During my free time, I like <marker>listen to a movie</marker> in cinema with my boyfriend and my friends.</example>
+      <example correction='watch a series'>During the week, I <marker>listen series</marker> or action movie in English because I want to improve myself with my sister.</example>
+    </rule>
+    <rule>
+      <pattern>
+          <token inflected="yes">listen</token>
+          <token min='0'>to</token>
+          <token min='0'>an</token>
+          <token regexp="yes">animated|anime|action</token>
+          <token regexp="yes">movie|film|series</token>
+      </pattern>
+      <message>The usual verb for "\3" is "watch". Did you mean <suggestion>watch an \4 \5</suggestion>?</message>
+      <example correction='watch an action movie'>During the week, I <marker>listen to action movie</marker> in English because I want to improve myself with my sister.</example>
+    </rule>
   </rulegroup>
 
   <rulegroup id='IN_ON_THE_TEAM' name='Collocation: in/on the team'>
     <!-- Created by Nicholas Walker (Bokomaru), 2017-11-14 -->
+    <!-- https://forum.languagetool.org/t/en-english-collocation-rules-to-contribute-to-lt/2318 -->
       <url>http://www.kentlee7.com/writ/collocation.errors.typical.pdf</url>
       <short>Collocation error</short>
     <rule>
@@ -19372,6 +19665,12 @@ USA
         </rule>
         <rulegroup id="DEER_DEAR" name="deer/dear">
             <rule>
+                <antipattern case_sensitive="yes">
+                    <token postag="SENT_START"/>
+                    <token>Deer</token>
+                    <token>,</token>
+                    <token>which</token>
+                </antipattern>
                 <pattern case_sensitive="yes">
                     <token postag="SENT_START"/>
                     <marker>

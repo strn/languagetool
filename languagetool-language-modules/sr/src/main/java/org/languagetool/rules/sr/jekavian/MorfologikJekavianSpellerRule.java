@@ -19,6 +19,7 @@
 package org.languagetool.rules.sr.jekavian;
 
 import org.languagetool.Language;
+import org.languagetool.rules.Example;
 import org.languagetool.rules.spelling.morfologik.MorfologikSpellerRule;
 
 import java.io.IOException;
@@ -37,8 +38,8 @@ public final class MorfologikJekavianSpellerRule extends MorfologikSpellerRule {
 
     super(messages, language);
     /*addExamplePair(
-            Example.wrong("Двије сам <marker>зивдјезе</marker> видјела."),
-            Example.fixed("Двије сам <marker>звијезде</marker> видјела.")
+            Example.wrong("<marker>Дивје</marker> сам звијезде видјела."),
+            Example.fixed("<marker>Двије</marker> сам звијезде видјела.")
     );*/
   }
 

@@ -39,7 +39,7 @@ import java.util.ResourceBundle;
  *
  * @since 4.0
  */
-public class JekavianSerbian extends Serbian {
+public abstract class JekavianSerbian extends Serbian {
 
   private Synthesizer synthesizer;
   private Tagger tagger;

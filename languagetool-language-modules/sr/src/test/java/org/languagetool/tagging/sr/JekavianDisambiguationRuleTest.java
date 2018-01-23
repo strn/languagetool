@@ -21,7 +21,7 @@ package org.languagetool.tagging.sr;
 import org.junit.Before;
 import org.junit.Test;
 import org.languagetool.TestTools;
-import org.languagetool.language.JekavianSerbian;
+import org.languagetool.language.CroatianSerbian;
 import org.languagetool.tagging.disambiguation.MultiWordChunker;
 import org.languagetool.tagging.disambiguation.rules.DisambiguationRuleTest;
 import org.languagetool.tokenizers.SRXSentenceTokenizer;
@@ -42,7 +42,7 @@ public class JekavianDisambiguationRuleTest extends DisambiguationRuleTest {
   public void setUp() {
     tagger = new JekavianTagger();
     tokenizer = new WordTokenizer();
-    sentenceTokenizer = new SRXSentenceTokenizer( new JekavianSerbian() );
+    sentenceTokenizer = new SRXSentenceTokenizer( new CroatianSerbian() );
     disambiguator = new MultiWordChunker("/sr/multiwords.txt");
   }
 

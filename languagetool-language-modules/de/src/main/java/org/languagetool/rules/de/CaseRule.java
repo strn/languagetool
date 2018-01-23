@@ -63,6 +63,10 @@ public class CaseRule extends Rule {
   // also see case_rule_exception.txt:
   private static final List<List<PatternToken>> ANTI_PATTERNS = Arrays.asList(
     Arrays.asList(
+      // see https://www.duden.de/suchen/dudenonline/u-f%C3%B6rmig
+      regex("[A-Z]-förmig(e|en|es|em|er|es)?")
+    ),
+    Arrays.asList(
       // see http://www.lektorenverband.de/die-deutsche-rechtschreibung-was-ist-neu/
       // and http://www.rechtschreibrat.com/DOX/rfdr_Woerterverzeichnis_2017.pdf
       regex("Goldenen?"),
@@ -688,8 +692,7 @@ public class CaseRule extends Rule {
     languages.add("Walisisch");
     languages.add("Weißrussisch");
   }
-  
-  private static final Set<String> myExceptionPhrases = CaseRuleExceptions.getExceptions();
+
   private static final Set<Pattern[]> exceptionPatterns = CaseRuleExceptions.getExceptionPatterns();
 
   private static final Set<String> substVerbenExceptions = new HashSet<>();

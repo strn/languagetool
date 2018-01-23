@@ -44,7 +44,7 @@ regexp case-insensitive maken : (?i)
 
 -->
 <!-- MOGELIJKE REGELS 
-Ad random -> at random, willekeurig
+
 -->
 <!-- mogelijk ook te gebruiken!
 <rule ...>
@@ -3641,6 +3641,17 @@ Ad random -> at random, willekeurig
 	<category id="CASING" name="Hoofdletters">
 		
 		<rulegroup id="TST_HOOFDLETTERS_OVERBODIG" name="Woorden die ook klein geschreven mogen worden.">
+			<rule>
+				<pattern>
+					<token/>
+					<marker>
+						<token case_sensitive="yes">Almachtige</token>
+					</marker>
+					<token><exception case_sensitive="yes" regexp="yes">God|Allah</exception></token>
+				</pattern>
+				<message>Dit woord heeft alleen hoofdletters als het woord gebruikt als naam van God of Allah: <suggestion><match no="2" case_conversion="alllower"/></suggestion></message>
+				<example correction="almachtige">Ik dank de <marker>Almachtige</marker> weer.</example>
+			</rule>
 			<rule>
 				<pattern>
 					<token case_sensitive="yes" regexp="yes">BTW|LED|CV|CD|DVD|TV|IC</token>
@@ -16867,6 +16878,17 @@ Ad random -> at random, willekeurig
 		</rulegroup>
 		-->
 		
+		<rulegroup id="AD_RANDOM" name="ad random → at random">
+			<rule>
+				<pattern>
+					<token>ad</token>	
+					<token>random</token>	
+				</pattern>
+				<message>U bedoelt vast <suggestion>at random</suggestion>, of beter nog: <suggestion>willekeurig</suggestion>.</message>
+				<example correction="at random|willekeurig">Het gaat <marker>ad random</marker> fout.</example>
+				<example>Het gaat <marker>at random</marker> goed.</example>
+			</rule>
+		</rulegroup>
 		<rulegroup id="HET_ZEI_ZO" name="het zei zo → het zij zo">
 			<rule>
 				<pattern>

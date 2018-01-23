@@ -209,6 +209,8 @@ public class GermanSpellerRuleTest {
     assertFirstSuggestion("berücksichtung", "Berücksichtigung", rule, lt);
     assertFirstSuggestion("okey", "okay", rule, lt);
     assertFirstSuggestion("Energiesparung", "Energieeinsparung", rule, lt);
+    assertFirstSuggestion("Deluxe-Version", "De-luxe-Version", rule, lt);
+    assertFirstSuggestion("De-luxe-Champagnr", "De-luxe-Champagner", rule, lt);
   }
 
   @Test
@@ -260,11 +262,18 @@ public class GermanSpellerRuleTest {
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Des World Wide Webs")).length); // expanded multi-word entry from spelling.txt
     assertEquals(0, rule.match(lt.getAnalyzedSentence("Der westperuanische Ferienort.")).length);
     assertEquals(0, rule.match(lt.getAnalyzedSentence("„Pumpe“-Nachfolge")).length);
+    assertEquals(0, rule.match(lt.getAnalyzedSentence("ÖVP- und FPÖ-Chefverhandler")).length); // first part is from spelling.txt
 
     assertEquals(1, rule.match(lt.getAnalyzedSentence("Miet und Zinseinkünfte")).length);
     assertEquals(1, rule.match(lt.getAnalyzedSentence("Stil- und Grammatik gut")).length);
     assertEquals(1, rule.match(lt.getAnalyzedSentence("Flasch- und Grammatikprüfung gut")).length);
     //assertEquals(1, rule.match(langTool.getAnalyzedSentence("Haupt- und Neben")).length);  // hunspell accepts this :-(
+
+    // check acceptance of words in ignore.txt ending with "-*"
+    assertEquals(0, rule.match(lt.getAnalyzedSentence("Dual-Use-Güter")).length);
+    assertEquals(0, rule.match(lt.getAnalyzedSentence("Dual-Use- und Wirtschaftsgüter")).length);
+    assertEquals(0, rule.match(lt.getAnalyzedSentence("Test-Dual-Use")).length);
+    assertEquals(1, rule.match(lt.getAnalyzedSentence("Dual-Use")).length);
   }
 
   @Test
